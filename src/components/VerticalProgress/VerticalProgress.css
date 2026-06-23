@@ -1,0 +1,104 @@
+.vertical-progress-container {
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  transform: translate(-50%, -40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+  height: 70vh;
+}
+.VerticalProgress
+{
+  color : #A8B89C;
+  position: fixed;
+  top: 21.5vh;
+  right: 150px;
+  font-size: 24px;
+  transform: translateY(-95%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.progress-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-number.start {
+  color: #6A7C65;
+}
+
+.progress-number.end {
+  color: #6A7C65;
+}
+
+/* السكة - لون ثابت A8B89C */
+.progress-track {
+  position: relative;
+  width: 12px;
+  height: 75vh;
+  background: #A8B89C; /* لون ثابت */
+  border-radius: 2px;
+  overflow: hidden; /* لإخفاء الجزء الزائد من التعبئة */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* شريط التقدم - يبدأ من الأعلى ويمتلئ للأسفل */
+.progress-fill {
+  position: absolute;
+  top: 0; /* يبدأ من الأعلى */
+  left: 10%;
+  width: 80%;
+  height: 5%; /* يبدأ من 0% */
+  background: linear-gradient(to bottom, #2A3E2E, #2A3E2E);
+  border-radius: 2px;
+  transition: height 0.2s linear;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  will-change: height;
+}
+
+/* المقبض - ثابت في الأعلى دائماً */
+.progress-thumb {
+  position: absolute;
+  top: -6px; /* نصف ارتفاع المقبض للخارج */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  /* border: 3px solid #007bff; */
+  border-radius: 50%;
+  /* box-shadow: 0 2px 8px rgba(0, 123, 255, 0.4); */
+  z-index: 2;
+  /* ثابت في الأعلى - لا يتحرك */
+}
+
+/* تأثير عند المرور بالفأرة */
+.progress-track:hover {
+  width: 8px;
+  transition: width 0.3s ease;
+}
+
+
+ @media (max-width: 992px) {
+  .vertical-progress-containermain {
+    display: none; 
+  }
+
+} 

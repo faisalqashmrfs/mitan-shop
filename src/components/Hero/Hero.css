@@ -1,0 +1,131 @@
+.Hero
+{
+    height: 100vh;
+    padding: 0px 80px;
+}
+.Hero .hero-bg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: 
+    sepia(.9)           
+    hue-rotate(80deg)    
+    saturate(1.8)        /*  التشبع */
+    brightness(0.2)      /*  السطوع */
+    contrast(1.1);       /*  التباين*/
+}
+.Hero .navbar 
+{
+    position: fixed;
+    top: 0;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 160px);
+    padding: 80px 0px;
+    z-index: 100;
+    max-height: 200px;
+}
+.Hero .navbar .style1
+{
+    color: #fff;
+    transition: 0.4s;
+    transform: translate(50px , 55vh);
+    font-size: 124px;
+    width: 200px;
+    font-family: var(--sans);
+    letter-spacing: -2px;
+    font-weight: 800;
+    color : #A8B89C ; 
+    line-height: 96px;
+}
+.Hero .navbar .style2
+{
+    font-family: var(--sans);
+    color: #F4F1E8;
+    transition: .4s;
+    font-size: 24px;
+    color: #fff;
+    transform: translate(0px , 0vh)
+}
+.Hero .navbar .line
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    transform: translate(-310px , 55vh);
+    height: 32vh;
+}
+.Hero .navbar .line2
+{
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    transform: translate(-310px , 55vh);
+    height: 32vh;
+}
+.Hero .navbar .line span
+{
+    font-family: var(--sans);
+    transition: .4s;
+    font-size: 24px;
+    color: #A8B89C;
+    /* text-align: center; */
+}
+.Hero .navbar .line button
+{
+    font-family: var(--sans);
+    transition: .4s;
+    font-size: 12px;
+    font-weight: 500;
+    color: #0E1A12;
+    background-color: #A8B89C;
+    border: none;
+    padding: 5px 80px;
+    cursor: pointer;
+}
+.Hero .navbar .line button img
+{
+    margin: 0px 0px -2px 10px;
+}
+.Hero .navbar ul
+{
+    display: flex;
+    list-style: none;
+    width: 40%;
+    justify-content: space-between;
+}
+
+.Hero .navbar ul li .activeLink
+{
+    color: #6AB013;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    letter-spacing: 1.4px;
+    background-image: url(./NavButtonAcitive.svg);
+    padding:5px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.Hero .navbar ul li .disactiveLink
+{
+    color: #6A7C65;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    letter-spacing: 1.4px;
+    padding:5px 20px;
+}

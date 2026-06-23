@@ -1,0 +1,19 @@
+/* 1. تفعيل ميزة الاستقرار المغناطيسي على المتصفح بالكامل بصفة أصلية */
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+/* 2. الأقسام التي تريدها أن تستقر بدقة */
+#Hero-Section-Id, 
+#Tunel-Section-Id, 
+#AppScrollSection-Id {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* 3. الأقسام الطويلة الحرة */
+#Branches-Section-Id, 
+#Footer-Section-Id {
+  scroll-snap-align: none;
+}

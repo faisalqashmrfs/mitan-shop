@@ -1,0 +1,207 @@
+.Branches
+{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 120px 80px 0 80px;
+}
+.Branches-bg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: 
+    sepia(.9)           
+    hue-rotate(80deg)    
+    saturate(1.8)        /*  التشبع */
+    brightness(0.2)      /*  السطوع */
+    contrast(1.1);       /*  التباين*/
+}
+.Branches .titlesm
+{
+    font-family: var(--sans);
+    font-size: 24px ;
+    color : #A8B89C ;
+}
+
+
+.Branches .titlelg
+{
+    font-family: var(--sans);
+    font-size: 72px ;
+    color : #F4F1E8 ;
+    margin: 30px 0;
+    line-height: 70px;
+}
+.Branches .titlelg span
+{
+    color : #6AB013 ;
+}
+.Branches .maindescription
+{
+    font-family: var(--sans);
+    font-size: 40px ;
+    color : #F4F1E8 ;
+    margin: 30px 0;
+    width: 850px;
+}
+.Branches .supdescription
+{
+    font-family: var(--sansDM);
+    font-size: 16px ;
+    color : #A8B89C ;
+    margin: 30px 0;
+    width: 900px;
+    line-height: 26px;
+}
+.Branches .cardsdat
+{
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.Branches .cardsdat .cardat
+{
+    width: 235px;
+    padding: 20px;
+    background-color: #61a3111e;
+    border : 2px solid #6AB013;
+    border-radius: 16px;
+}
+.Branches .cardsdat .cardat span
+{
+    font-family: var(--sans);
+    font-size: 48px ;
+    color : #F4F1E8 ;
+    
+}
+.Branches .cardsdat .cardat p
+{
+    font-family: var(--sans);
+    font-size: 20px ;
+    color : #A8B89C ;
+    
+}
+.Branches .paragrafelast
+{
+    font-family: var(--sans);
+    font-size: 16px ;
+    color : #F4F1E8 ;
+    margin: 40px 0 0 10px;
+    width: 500px;
+    position: relative;
+    line-height: 30px;
+}
+.Branches .paragrafelast::after
+{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    width: 4px;
+    height: 100%;
+    background-color: #6AB013;
+}
+
+@media (max-width: 1200px) {
+    .Branches
+    {
+        padding: 120px 40px 0 40px;
+    }
+    .Branches .titlelg
+    {
+        font-size: 50px ;
+        line-height: 50px;
+    }
+    .Branches .maindescription
+    {
+        width: 600px;
+        font-size: 30px ;
+    }
+    .Branches .supdescription
+    {
+        width: 700px;
+        font-size: 16px ;
+    }
+}
+
+@media (max-width: 760px) {
+    .Branches .titlelg
+    {
+        font-size: 30px ;
+        line-height: 30px;
+    }
+    .Branches .maindescription
+    {
+        width: 600px;
+        font-size: 20px ;
+        width: 410px;
+    }
+    .Branches .supdescription
+    {
+        width: 700px;
+        font-size: 12px ;
+        width: 410px;
+    }
+    .Branches .cardsdat .cardat
+    {
+        width: 185px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    .Branches .cardsdat .cardat span
+    {
+        font-size: 34px ;
+        
+    }
+    .Branches .cardsdat .cardat p
+    {
+        font-size: 16px ;
+        
+    }
+}
+@media (max-width:566px ) {
+    .Branches
+    {
+        padding: 120px 20px 0 20px;
+    }
+    .Branches .titlelg
+    {
+        font-size: 24px ;
+        line-height: 24px;
+    }
+    .Branches .maindescription
+    {
+        width: 600px;
+        font-size: 16px ;
+        width: 300px;
+    }
+    .Branches .supdescription
+    {
+        width: 700px;
+        font-size: 12px ;
+        width: 300px;
+    }
+    .Branches .paragrafelast
+    {
+        font-size: 12px ;
+        margin: 40px 0 0 5px;
+        width: 310px;
+        position: relative;
+        line-height: 20px;
+    }
+}
