@@ -13,21 +13,21 @@ export default function Branches() {
       <div className="cardsdat">
         <div className="cardat">
           <div>
-            <img src="/Vector+.png" alt="" />
+            <img src="mitan-shop/Vector+.png" alt="" />
             <span>04</span>
           </div>
           <p>City branches</p>
         </div>
         <div className="cardat">
           <div>
-            <img src="/Vector+.png" alt="" />
+            <img src="/mitan-shop/Vector+.png" alt="" />
             <span>200</span>
           </div>
           <p>Local farm partners</p>
         </div>
         <div className="cardat">
           <div>
-            <img src="/Vector+.png" alt="" />
+            <img src="./mitan-shop/Vector+.png" alt="" />
             <span>04</span>
           </div>
           <p>Quality standard</p>

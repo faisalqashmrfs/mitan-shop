@@ -39,7 +39,7 @@ function Hero() {
             <li onClick={() => setIsactive(4)}><a href="#contact" className={isactive === 4 ? "activeLink" : "disactiveLink"}>OUTRO</a></li>
         </ul>
       </nav>
-      <img className="hero-bg" src="/heroBG.png" alt="Hero Background" />
+      <img className="hero-bg" src="mitan-shop/heroBG.png" alt="Hero Background" />
     </div>
   );
 }

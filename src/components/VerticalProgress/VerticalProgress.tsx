@@ -37,7 +37,7 @@ function VerticalProgress() {
   }, [updateProgress]);
 
   const startNumber = currentSection;
-  const endNumber = currentSection + 1;
+  // const endNumber = currentSection + 1;
 
   return (
     <div className="vertical-progress-containermain">
