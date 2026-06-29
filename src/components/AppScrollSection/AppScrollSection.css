@@ -1,0 +1,105 @@
+/* ======================================================= */
+/* التنسيقات الأساسية للكروت (الشاشات الكبيرة واللاب توب) */
+/* ======================================================= */
+.responsive-card {
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.feature-item {
+    padding: 10px 14px;
+    border: 1px solid #6AB013;
+    background-color: #69b01323;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #A8B89C;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.card-shopping-btn {
+    padding: 15px 34px;
+    border: 1px solid #A8B89C;
+    background-color: #A8B89C;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    max-width: 300px;
+    color: #0E1A12;
+    text-align: center;
+    margin: 30px 0 0 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-shopping-btn:hover {
+    background-color: #bdcbb1;
+}
+
+/* ======================================================= */
+/* شاشات التابلت (992px فما دون)                           */
+/* ======================================================= */
+@media (max-width: 992px) {
+    .responsive-card {
+        padding: 30px;
+        max-width: 650px;
+    }
+}
+
+/* ======================================================= */
+/* شاشات الموبايل (768px فما دون)                          */
+/* ======================================================= */
+@media (max-width: 768px) {
+    .responsive-card {
+        padding: 24px;
+        max-width: 95%; /* الكرت يتمدد ليأخذ معظم مساحة الموبايل المتاحة */
+        border-radius: 16px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr); /* المربعات الثلاثة تتراص أفقياً بشكل منظم */
+        gap: 8px;
+    }
+
+    .feature-item {
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+
+    .card-shopping-btn {
+        padding: 12px 24px;
+        margin-top: 24px;
+        max-width: 100%; /* الزر يتمدد بكامل العرض لتسهيل النقر بالإصبع */
+    }
+}
+
+/* ======================================================= */
+/* شاشات الموبايل الصغيرة جداً (480px فما دون)             */
+/* ======================================================= */
+@media (max-width: 480px) {
+    .responsive-card {
+        padding: 20px 16px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* تترتب المربعات عمودياً لضمان عدم خروج الكلمات باللغة الإنجليزية */
+        gap: 6px;
+    }
+
+    .feature-item {
+        padding: 8px 10px;
+    }
+}

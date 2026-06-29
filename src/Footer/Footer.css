@@ -1,4 +1,170 @@
 .Footer{
     width: 100%;
     height: 100vh ;
+    position: relative;
+    min-height: 950px;
+}
+.Footer .footer-bg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: 
+    sepia(.9)           
+    hue-rotate(80deg)    
+    saturate(1.8)        /*  التشبع */
+    brightness(0.2)      /*  السطوع */
+    contrast(1.1);       /*  التباين*/
+}
+.Footer .topthanks h3
+{
+    font-family: var(--sans);
+    font-size: 124px;
+    color: #A8B89C;
+    line-height: 96px;
+    letter-spacing: -2px;
+    font-weight: 900;
+    width: 500px;
+    position: absolute;
+    top: 20vh;
+    left: 80px;
+}
+.Footer .topthanks h4
+{
+    font-family: var(--sans);
+    font-size: 72px;
+    color: #A8B89C;
+    line-height: 83px;
+    letter-spacing: -1px;
+    font-weight: 700;
+    position: absolute;
+    top: 45vh;
+    left: 80px;
+}
+.Footer .bottLinks
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    top: 53vh;
+    right: 160px;
+    background-color: #000;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #fff;
+}
+.Footer .bottLinks li
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 180px;
+    margin: 5px;
+}
+.Footer .bottLinks li a
+{
+    color: #A8B89C;
+}
+.Footer .footerdown
+{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 35px 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.Footer .footerdown .leftfooter , .Footer .footerdown .rightfooter
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: start;
+    gap: 10px;
+    color: #A8B89C;
+}
+.Footer .footerdown span 
+{
+    font-size: 14px;
+    margin: 5px 0;
+}
+.Footer .footerdown .Linksfooter
+{
+    color: #5A7A5E;
+}
+.Footer .footerdown .leftfooter .titlefooter, .Footer .footerdown .rightfooter .titlefooter
+{
+    font-size: 20px;
+}
+
+@media(max-width:992px)
+{
+    .Footer .topthanks h3
+{
+    font-size: 96px;
+    line-height: 76px;
+    font-weight: 900;
+    width: 500px;
+    top: 20vh;
+    left: 40px;
+}
+.Footer .topthanks h4
+{
+    font-size: 54px;
+    line-height: 63px;
+    font-weight: 700;
+    top: 38vh;
+    left: 40px;
+}
+.Footer .footerdown
+{
+    padding: 35px 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 30px;
+}   
+}
+
+@media(max-width:562px)
+{
+    .Footer .topthanks h3
+    {
+        font-size: 66px;
+        line-height: 66px;
+        width: 300px;
+        top: 15vh;
+        left: 20px;
+    }
+    .Footer .topthanks h4
+    {
+        font-size: 36px;
+        line-height: 43px;
+        top: 32vh;
+        left: 20px;
+    }
+    .Footer .bottLinks
+    {
+        top: 40vh;
+        right: auto;
+        left: 20px;
+        padding: 16px;
+    }
+    .Footer .bottLinks li
+    {
+        gap: 100px;
+    }
+    .Footer .footerdown
+    {
+        padding: 35px 20px;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 30px;
+    }  
 }

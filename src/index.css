@@ -27,3 +27,7 @@
 body {
   height: 800vh;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

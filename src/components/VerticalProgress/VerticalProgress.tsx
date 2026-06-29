@@ -56,7 +56,7 @@ function VerticalProgress() {
         </div>
 
         <div className="progress-number end">
-          {/* {endNumber} */}10
+          {/* {endNumber} */}14
         </div>
       </div>
     </div>

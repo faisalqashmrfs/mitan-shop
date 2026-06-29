@@ -124,3 +124,62 @@
     font-weight: 600;
 }
 
+/* ... الكود القديم ... */
+
+/* ============================================= */
+/*           RESPONSIVE (التجاوب)                */
+/* ============================================= */
+
+/* للشاشات المتوسطة (تابلت) */
+@media (max-width: 1024px) {
+  .box1icons, .box2icons, .box3icons, .box4icons {
+    gap: 15px;
+    width: 85%; /* توسيع العرض قليلاً */
+  }
+  
+  .box1icons h3, .box2icons h3, .box3icons h3, .box4icons h3 {
+    font-size: 24px; /* تصغير العنوان */
+  }
+  
+  .box1icons p, .box2icons p, .box3icons p, .box4icons p {
+    font-size: 10px;
+  }
+}
+
+/* للشاشات الصغيرة (موبايل) */
+@media (max-width: 768px) {
+  .box1icons, .box2icons, .box3icons, .box4icons {
+    flex-direction: column; /* جعل الصورة والنص تحت بعض */
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 90%;
+  }
+
+  /* تصغير حجم الصور داخل الصناديق */
+  .box1icons img, .box2icons img, .box3icons img, .box4icons img {
+    width: 40px !important; 
+    height: 40px !important;
+  }
+
+  .box1icons h3, .box2icons h3, .box3icons h3, .box4icons h3 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+  }
+  
+  .box1icons p, .box2icons p, .box3icons p, .box4icons p {
+    font-size: 9px;
+  }
+
+  .box1icons span, .box2icons span, .box3icons span, .box4icons span {
+    font-size: 10px;
+  }
+}
+
+/* للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+  .box1icons h3, .box2icons h3, .box3icons h3, .box4icons h3 {
+    font-size: 15px;
+  }
+}
+

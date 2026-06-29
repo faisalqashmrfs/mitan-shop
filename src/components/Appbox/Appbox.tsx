@@ -1,56 +1,98 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react"; // 1. استيراد الـ useRef
+import { useRef, useEffect, useState } from "react"; // أضف useState و useEffect
 import "./Appbox.css";
 
 function Appbox() {
-  const totalBoxes = 4;
-  const containerRef = useRef(null); // 2. إنشاء مرجع للقسم
+  const totalBoxes = 7;
+  const containerRef = useRef(null);
 
-  // 3. ربط الـ useScroll بالقسم الحالي وتحديد نقطة البداية والنهاية بدقة
+  // ============================================================
+  // 1. جلب عرض الشاشة لتعديل القيم ديناميكياً
+  // ============================================================
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // دالة مساعدة لحساب الحجم بناءً على العرض (لتكون مرنة)
+  const getResponsiveSize = (baseSize: number) => {
+    if (windowWidth < 480) return baseSize * 0.3;  // جوال صغير
+    if (windowWidth < 768) return baseSize * 0.4;  // جوال
+    if (windowWidth < 1024) return baseSize * 0.6; // تابلت
+    return baseSize; // ديسكتوب
+  };
+
+  // دالة لتعديل الإحداثيات (X, Y) لتتناسب مع الشاشة
+  const getResponsivePosition = (value: number) => {
+    if (windowWidth < 768) return value * 0.3; // تصغير المسافات على الجوال
+    if (windowWidth < 1024) return value * 0.6;
+    return value;
+  };
+
+  // ============================================================
+  // 2. تحديث بيانات الأيقونات (Icons Data) لتكون متجاوبة
+  // ============================================================
+  const iconsData = [
+    { x: getResponsivePosition(-550), y: getResponsivePosition(-280), size: getResponsiveSize(250), finalScale: 1.2, rotation: 420 },
+    { x: getResponsivePosition(0), y: getResponsivePosition(-350), size: getResponsiveSize(100), finalScale: 1.4, rotation: 480 },
+    { x: getResponsivePosition(550), y: getResponsivePosition(-250), size: getResponsiveSize(55), finalScale: 1.1, rotation: 390 },
+    { x: getResponsivePosition(-600), y: getResponsivePosition(260), size: getResponsiveSize(200), finalScale: 1.5, rotation: 500 },
+    { x: getResponsivePosition(-300), y: getResponsivePosition(320), size: getResponsiveSize(85), finalScale: 0.8, rotation: 370 },
+    { x: getResponsivePosition(300), y: getResponsivePosition(310), size: getResponsiveSize(130), finalScale: 0.7, rotation: 360 },
+    { x: getResponsivePosition(580), y: getResponsivePosition(280), size: getResponsiveSize(255), finalScale: 1.3, rotation: 450 },
+  ];
+
+  // ============================================================
+  // 3. جعل حجم الصناديق (Boxes) متجاوباً
+  // ============================================================
+  const getBoxWidth = () => {
+    if (windowWidth < 480) return "85%";
+    if (windowWidth < 768) return "80%";
+    if (windowWidth < 1024) return "60%";
+    return "45%"; // القيمة الأصلية لأول صندوق
+  };
+
+const getBoxHeight = () => {
+  if (windowWidth < 480) return 180;  // كانت 120
+  if (windowWidth < 768) return 200;  // كانت 150
+  if (windowWidth < 1024) return 230; // كانت 180
+  return 250; // كانت 200 - زيادة 50px
+};
+
+  // ... (الكود المتبقي من الـ Hooks الخاصة بالـ Scroll يبقى كما هو بدون تغيير) ...
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // ===== الصندوق الأول: 0% إلى 25% =====
+  // ===== الصندوق الأول =====
   const box1Scale = useTransform(scrollYProgress, [0.12, 0.18, 0.25], [0.1, 1, 1.8]);
   const box1Opacity = useTransform(scrollYProgress, [0.10, 0.12, 0.18, 0.25, 0.27], [0, 0, 1, 1, 0]);
   const box1Y = useTransform(scrollYProgress, [0.12, 0.18, 0.25], [-20, 100, 500]);
 
-  // ===== الصندوق الثاني: 25% إلى 50% =====
+  // ===== الصندوق الثاني =====
   const box2Scale = useTransform(scrollYProgress, [0.25, 0.37, 0.50], [0.1, 1, 1.8]);
   const box2Opacity = useTransform(scrollYProgress, [0.25, 0.32, 0.50, 0.52], [0, 1, 1, 0]);
   const box2Y = useTransform(scrollYProgress, [0.25, 0.37, 0.50], [-20, 100, 500]);
 
-  // ===== الصندوق الثالث: 50% إلى 75% =====
+  // ===== الصندوق الثالث =====
   const box3Scale = useTransform(scrollYProgress, [0.50, 0.62, 0.75], [0.1, 1, 1.8]);
   const box3Opacity = useTransform(scrollYProgress, [0.50, 0.57, 0.75, 0.77], [0, 1, 1, 0]);
   const box3Y = useTransform(scrollYProgress, [0.50, 0.62, 0.75], [-20, 100, 500]);
 
-  // ===== الصندوق الرابع: 75% إلى 100% =====
+  // ===== الصندوق الرابع =====
   const box4Scale = useTransform(scrollYProgress, [0.75, 0.85, 0.93], [0.1, 1, 1.8]);
   const box4Opacity = useTransform(scrollYProgress, [0.75, 0.80, 0.93], [0, 1, 1]);
   const box4Y = useTransform(scrollYProgress, [0.75, 0.85, 0.93], [-20, 100, 200]);
 
-  // ==========================================
-  // ✨ ميزة التوزيع المستطيلي مع تفاوت الأحجام ✨
-  // ==========================================
-  const iconsData = [
-    { x: -550, y: -280, size: 250, finalScale: 1.2, rotation: 420 },
-    { x: 0, y: -350, size: 100, finalScale: 1.4, rotation: 480 },
-    { x: 550, y: -250, size: 55, finalScale: 1.1, rotation: 390 },
-    { x: -600, y: 260, size: 200, finalScale: 1.5, rotation: 500 },
-    { x: -300, y: 320, size: 85, finalScale: 0.8, rotation: 370 },
-    { x: 300, y: 310, size: 130, finalScale: 0.7, rotation: 360 },
-    { x: 580, y: 280, size: 255, finalScale: 1.3, rotation: 450 },
-  ];
-
+  // ... (الكود الخاص بحركات الأيقونات يبقى كما هو) ...
   const icon1Move = useTransform(scrollYProgress, [0.12, 0.18, 0.25, 0.27], [0, 1, 1.5, 2]);
   const icon1Opacity = useTransform(scrollYProgress, [0.12, 0.15, 0.23, 0.25, 0.27], [0, 1, 1, 1, 0]);
-
   const icon2Move = useTransform(scrollYProgress, [0.25, 0.37, 0.50, 0.52], [0, 1, 1.5, 2]);
   const icon2Opacity = useTransform(scrollYProgress, [0.25, 0.30, 0.47, 0.50, 0.52], [0, 1, 1, 1, 0]);
-
   const icon3Move = useTransform(scrollYProgress, [0.50, 0.62, 0.75, 0.77], [0, 1, 1.5, 2]);
   const icon3Opacity = useTransform(scrollYProgress, [0.50, 0.55, 0.72, 0.75, 0.77], [0, 1, 1, 1, 0]);
 
@@ -58,10 +100,13 @@ function Appbox() {
     return baseRotation + Math.random() * 540;
   };
 
+  // ============================================================
+  // 4. تحديث الـ return (نفس الكود لكن مع تعديل الـ style للصناديق)
+  // ============================================================
   return (
     <div 
-      ref={containerRef} // 4. وضع المرجع هنا ليتم حساب السكرول من بداية هذا الـ div
-      id="Tunel-Section-Id" // لربطه بـ CSS Scroll Snap إذا أردت
+      ref={containerRef}
+      id="Tunel-Section-Id"
       style={{
         height: `${totalBoxes * 100}vh`,
         position: "relative"
@@ -88,7 +133,7 @@ function Appbox() {
           justifyContent: "center",
         }}>
 
-          {/* ==================== الصندوق الأول وأيقوناته ==================== */}
+          {/* ===== الصندوق الأول ===== */}
           {iconsData.map((pos, i) => {
             const randomRotate = getRandomRotation(pos.rotation || 360);
             return (
@@ -122,11 +167,12 @@ function Appbox() {
             );
           })}
 
+          {/* صندوق رقم 1 - تم تعديل الـ width والـ height هنا */}
           <motion.div
             style={{
               position: "absolute",
-              width: "45%",
-              height: 150,
+              width: getBoxWidth(),    // <-- أصبح متجاوباً
+              height: getBoxHeight(),  // <-- أصبح متجاوباً
               backgroundColor: "#6AB0131F",
               border: "2px solid #467B1E",
               borderRadius: 20,
@@ -140,12 +186,7 @@ function Appbox() {
               opacity: box1Opacity,
               y: box1Y,
               zIndex: 2,
-              boxShadow: `
-              0 0 30px rgba(70, 123, 30, 0.3),
-              0 0 60px rgba(70, 123, 30, 0.1),
-              0 10px 40px rgba(0, 0, 0, 0.2),
-              inset 0px 50px 0px 75px rgba(0, 0, 0, 0.2)
-            `,
+              boxShadow: `0 0 30px rgba(70, 123, 30, 0.3), 0 0 60px rgba(70, 123, 30, 0.1), 0 10px 40px rgba(0, 0, 0, 0.2), inset 0px 50px 0px 75px rgba(0, 0, 0, 0.2)`,
             }}
           >
             <div className="box1icons">
@@ -158,7 +199,7 @@ function Appbox() {
             </div>
           </motion.div>
 
-          {/* ==================== الصندوق الثاني وأيقوناته ==================== */}
+          {/* ===== الصندوق الثاني ===== */}
           {iconsData.map((pos, i) => {
             const randomRotate = getRandomRotation(pos.rotation || 360);
             return (
@@ -195,8 +236,8 @@ function Appbox() {
           <motion.div
             style={{
               position: "absolute",
-              width: "50%",
-              height: 200,
+              width: getBoxWidth(),    // <-- متجاوب
+              height: getBoxHeight(),  // <-- متجاوب
               backgroundColor: "#f9741636",
               border: "2px solid #F97316",
               borderRadius: 20,
@@ -210,12 +251,7 @@ function Appbox() {
               opacity: box2Opacity,
               y: box2Y,
               zIndex: 2,
-              boxShadow: `
-              0 0 30px rgba(123, 80, 30, 0.3),
-              0 0 60px rgba(123, 80, 30, 0.1),
-              0 10px 40px rgba(0, 0, 0, 0.2),
-              inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)
-            `,
+              boxShadow: `0 0 30px rgba(123, 80, 30, 0.3), 0 0 60px rgba(123, 80, 30, 0.1), 0 10px 40px rgba(0, 0, 0, 0.2), inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)`,
             }}
           >
             <div className="box2icons">
@@ -228,7 +264,7 @@ function Appbox() {
             </div>
           </motion.div>
 
-          {/* ==================== الصندوق الثالث وأيقوناته ==================== */}
+          {/* ===== الصندوق الثالث ===== */}
           {iconsData.map((pos, i) => {
             const randomRotate = getRandomRotation(pos.rotation || 360);
             return (
@@ -265,8 +301,8 @@ function Appbox() {
           <motion.div
             style={{
               position: "absolute",
-              width: "50%",
-              height: 200,
+              width: getBoxWidth(),
+              height: getBoxHeight(),
               backgroundColor: "#fbe4152d",
               border: "2px solid #FBAE15",
               borderRadius: 20,
@@ -280,12 +316,7 @@ function Appbox() {
               opacity: box3Opacity,
               y: box3Y,
               zIndex: 2,
-              boxShadow: `
-              0 0 30px rgba(123, 109, 30, 0.3),
-              0 0 60px rgba(123, 109, 30, 0.1),
-              0 10px 40px rgba(0, 0, 0, 0.2),
-              inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)
-            `,
+              boxShadow: `0 0 30px rgba(123, 109, 30, 0.3), 0 0 60px rgba(123, 109, 30, 0.1), 0 10px 40px rgba(0, 0, 0, 0.2), inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)`,
             }}
           >
             <div className="box3icons">
@@ -298,12 +329,12 @@ function Appbox() {
             </div>
           </motion.div>
 
-          {/* ==================== الصندوق الرابع (بدون أيقونات) ==================== */}
+          {/* ===== الصندوق الرابع ===== */}
           <motion.div
             style={{
               position: "absolute",
-              width: "50%",
-              height: 200,
+              width: getBoxWidth(),
+              height: getBoxHeight(),
               backgroundColor: "#04407242",
               borderRadius: 20,
               display: "flex",
@@ -316,12 +347,7 @@ function Appbox() {
               opacity: box4Opacity,
               y: box4Y,
               zIndex: 2,
-              boxShadow: `
-              0 0 30px rgba(32, 30, 123, 0.11),
-              0 0 60px rgba(33, 32, 126, 0.01),
-              0 10px 40px rgba(0, 0, 0, 0.12),
-              inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)
-            `,
+              boxShadow: `0 0 30px rgba(32, 30, 123, 0.11), 0 0 60px rgba(33, 32, 126, 0.01), 0 10px 40px rgba(0, 0, 0, 0.12), inset 0px 0px 100px 75px rgba(0, 0, 0, 0.2)`,
             }}
           >
             <div className="box4icons">

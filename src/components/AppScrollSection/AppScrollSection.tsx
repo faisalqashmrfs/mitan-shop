@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import "./AppScrollSection.css";
 
-// 1. مصفوفة البيانات باللغة الإنجليزية
+// مصفوفة البيانات باللغة الإنجليزية لسكشن الفروع
 const CARDS_DATA = [
   {
     id: 1,
@@ -41,7 +41,7 @@ const CARDS_DATA = [
 function AppScrollSection() {
   const containerRef = useRef(null);
 
-  // حساب الارتفاع الإجمالي ديناميكياً
+  // حساب الارتفاع الإجمالي للتمرير ديناميكياً (عدد الكروت * 100vh)
   const totalScrollHeight = CARDS_DATA.length * 100;
 
   const { scrollYProgress } = useScroll({
@@ -54,7 +54,7 @@ function AppScrollSection() {
       ref={containerRef}
       style={{ height: `${totalScrollHeight}vh`, position: "relative" }}
     >
-      {/* الحاوية الثابتة في الشاشة أثناء التمرير */}
+      {/* الحاوية المثابتة (Sticky Container) الممتدة بملء الشاشة أثناء السكرول */}
       <div style={{
         position: "sticky",
         top: 0,
@@ -66,20 +66,33 @@ function AppScrollSection() {
         justifyContent: "center"
       }}>
 
-        {/* 2. طبقة الصور الخلفية - تم إرجاعها كـ motion.img ودمج الفلاتر */}
+        {/* 1. الخلفية الثابتة الدائمة (صورة دمشق) لمنع وجود فراغ أسود في البداية والنهاية */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: `url(${CARDS_DATA[0].bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "sepia(0.9) hue-rotate(80deg) saturate(4) brightness(0.3) contrast(1)",
+          zIndex: 0
+        }} />
+
+        {/* 2. طبقة الصور المتحركة بالتناوب (تبدأ من الكرت الثاني لأن الأول بالخلفية الثابتة) */}
         {CARDS_DATA.map((card, index) => {
+          if (index === 0) return null; // تخطي الصورة الأولى منعاً لتضارب الأنميشن
+
           const start = index / CARDS_DATA.length;
           const end = (index + 1) / CARDS_DATA.length;
 
           const safeStartIn = Math.max(0, start - 0.05);
-          const safeEndOut = Math.max(0, end - 0.05);
+          const safeEndOut = Math.min(1, end - 0.05);
 
           const imgOpacity = useTransform(scrollYProgress, [safeStartIn, start, safeEndOut, end], [0, 1, 1, 0]);
-
-          // هنا نقوم بتحريك قيمة البكسل للبلور فقط ديناميكياً
           const blurValue = useTransform(scrollYProgress, [safeStartIn, start, safeEndOut, end], [20, 0, 0, 20]);
 
-          // دمج فلاتر الألوان الخاصة بك مع قيمة الـ blur المتغيرة عبر السكرول في سطر واحد
           const mixedFilter = useTransform(
             blurValue,
             (v) => `blur(${v}px) sepia(0.9) hue-rotate(80deg) saturate(4) brightness(0.3) contrast(1)`
@@ -97,17 +110,17 @@ function AppScrollSection() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                zIndex: 0,
+                zIndex: 1,
                 pointerEvents: "none",
-                opacity: imgOpacity,      // إعادة تفعيل التلاشي بالتمرير
-                filter: mixedFilter       // تطبيق الفلتر المدمج الذكي
+                opacity: imgOpacity,
+                filter: mixedFilter
               }}
               className="bg-cards-main-img"
             />
           );
         })}
 
-        {/* طبقة تظليل داكنة لرفع تباين وقرائية نصوص الكروت */}
+        {/* طبقة التظليل الداكنة الموحدة لضمان وضوح النصوص وقراءتها */}
         <div style={{
           position: "absolute",
           top: 0,
@@ -115,10 +128,10 @@ function AppScrollSection() {
           width: "100%",
           height: "100%",
           backgroundColor: "rgba(0, 0, 0, 0.45)",
-          zIndex: 1
+          zIndex: 2
         }} />
 
-        {/* 3. حاوية الكروت الحركية المستجيبة */}
+        {/* 3. حاوية الكروت الحركية المرنة والذكية */}
         <div style={{
           position: "relative",
           width: "100%",
@@ -128,23 +141,62 @@ function AppScrollSection() {
           alignItems: "center",
           justifyContent: "center",
           padding: "0 20px",
-          zIndex: 2
+          zIndex: 3
         }}>
           {CARDS_DATA.map((card, index) => {
             const start = index / CARDS_DATA.length;
             const end = (index + 1) / CARDS_DATA.length;
 
-            const safeCardStart = Math.max(0, start);
-            const safeCardStartIn = Math.max(0, start + 0.15);
-            const safeCardEndOut = Math.max(0, end - 0.15);
-            const safeCardEnd = Math.max(0, end);
+            const isFirst = index === 0;
+            const isLast = index === CARDS_DATA.length - 1;
 
-            const safeCardOpacityIn = Math.max(0, start + 0.10);
-            const safeCardOpacityOut = Math.max(0, end - 0.10);
+            const safeCardStart    = Math.max(0, start);
+            const safeCardStartIn  = Math.max(0, start + 0.15);
+            const safeCardEndOut   = Math.min(1, end - 0.15);
+            const safeCardEnd      = Math.min(1, end);
 
-            const cardX = useTransform(scrollYProgress, [safeCardStart, safeCardStartIn, safeCardEndOut, safeCardEnd], ["120%", "0%", "0%", "-120%"]);
-            const cardOpacity = useTransform(scrollYProgress, [safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd], [0, 1, 1, 0]);
-            const cardBlur = useTransform(scrollYProgress, [safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd], ["blur(5px)", "blur(0px)", "blur(0px)", "blur(5px)"]);
+            const safeCardOpacityIn  = Math.max(0, start + 0.10);
+            const safeCardOpacityOut = Math.min(1, end - 0.10);
+
+            // تحريك المحور X: الكرت الأول يبدأ ثابتاً، والأخير يستقر ثابتاً عند نهاية التمرير
+            const cardX = useTransform(
+              scrollYProgress,
+              [safeCardStart, safeCardStartIn, safeCardEndOut, safeCardEnd],
+              [
+                isFirst ? "0%" : "120%", 
+                "0%", 
+                "0%", 
+                isLast ? "0%" : "-120%"
+              ]
+            );
+
+            // الشفافية: حماية الأطراف (0 و 1) لقطع الطريق أمام عودة ظهور الكرت الأول
+            const cardOpacity = useTransform(
+              scrollYProgress,
+              [0, safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd, 1],
+              [
+                isFirst ? 1 : 0,
+                isFirst ? 1 : 0,
+                1,
+                1,
+                isLast ? 1 : 0,
+                isLast ? 1 : 0
+              ]
+            );
+
+            // التحكم في البلور (الغَبَش) التابع للكروت لحركة دخول وخروج ناعمة
+            const cardBlur = useTransform(
+              scrollYProgress,
+              [0, safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd, 1],
+              [
+                isFirst ? "blur(0px)" : "blur(5px)",
+                isFirst ? "blur(0px)" : "blur(5px)",
+                "blur(0px)",
+                "blur(0px)",
+                isLast ? "blur(0px)" : "blur(5px)",
+                isLast ? "blur(0px)" : "blur(5px)"
+              ]
+            );
 
             return (
               <motion.div
@@ -154,109 +206,66 @@ function AppScrollSection() {
                   x: cardX,
                   opacity: cardOpacity,
                   filter: cardBlur,
-                  width: "800px",
                   border: "1px solid #6AB013",
                   backgroundColor: "#69b01323",
                   backdropFilter: "blur(5px)",
                   borderRadius: "24px",
-                  padding: "40px",
                   boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
                   boxSizing: "border-box"
                 }}
+                className="responsive-card"
               >
-
-
-                {/* العنوان الأساسي */}
+                {/* العنوان الأساسي للفرع */}
                 <h2 style={{
-                  fontSize: "clamp(16px, 4vw, 48px)",
+                  fontSize: "clamp(24px, 5vw, 48px)",
                   fontFamily: `var(--sans)`,
                   fontWeight: "600",
                   color: "#F4F1E8",
-                  margin: "0 0 16px 0",
+                  margin: "0 0 12px 0",
                   lineHeight: "1.2"
                 }}>
                   {card.title}
                 </h2>
 
-                {/* العنوان الفرعي */}
+                {/* العنوان الفرعي / الاقتباس */}
                 <span style={{
-                  fontSize: "14px",
+                  fontSize: "clamp(11px, 2vw, 14px)",
                   fontWeight: "500",
                   fontFamily: `var(--sans)`,
                   textTransform: "uppercase",
                   letterSpacing: "1.5px",
                   color: "#A8B89C",
                   display: "block",
-                  margin: "15px 0px"
+                  margin: "10px 0px"
                 }}>
                   {card.subtitle}
                 </span>
 
-
-                {/* الوصف */}
+                {/* نص الوصف التفصيلي */}
                 <p style={{
-                  fontSize: "16px",
+                  fontSize: "clamp(13px, 2.5vw, 16px)",
                   color: "#A8B89C",
                   fontWeight: "500",
                   fontFamily: `var(--sans)`,
                   lineHeight: "1.6",
-                  margin: "0 0 30px 0"
+                  margin: "0 0 20px 0"
                 }}>
                   {card.description}
                 </p>
 
-                {/* المربعات الثلاثة */}
-                <div style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-                  gap: "12px"
-                }}>
+                {/* المربعات الثلاثة المميزة للمنتجات */}
+                <div className="features-grid">
                   {card.features.map((feat, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        padding: "10px 14px",
-                        border: "1px solid #6AB013",
-                        backgroundColor: "#69b01323",
-                        borderRadius: "12px",
-                        fontSize: "13px",
-                        fontWeight: "600",
-                        color: "#A8B89C",
-                        textAlign: "center",
-                        boxShadow: "0 2px 4px rgba(0,0,0,0.02)"
-                      }}
-                    >
+                    <div key={i} className="feature-item">
                       {feat}
                     </div>
                   ))}
                 </div>
 
-                <button
-                  style={{
-                    padding: "15px 34px",
-                    border: "1px solid #A8B89C",
-                    backgroundColor: "#A8B89C",
-                    borderRadius: "12px",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    width : "300px",
-                    color: "#0E1A12",
-                    textAlign: "center",
-                    margin : "30px 0",
-                    boxShadow: "0 2px 4px rgba(0,0,0,0.02)",
-                    display : "flex",
-                    justifyContent : "center" ,
-                    gap: "20px"
-                  }}
-                >
+                {/* زر الشراء والإجراء */}
+                <button className="card-shopping-btn">
                   Start Shopping
-                  <img src="/arrowdown.png" alt="" 
-                  style={
-                    {
-                      rotate : "-90deg"
-                    }
-                  }
-                  />
+                  <img src="/arrowdown.png" alt="" style={{ rotate : "-90deg" }} />
                 </button>
 
               </motion.div>
