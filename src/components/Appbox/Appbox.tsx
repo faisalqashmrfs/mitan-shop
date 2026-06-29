@@ -106,7 +106,6 @@ const getBoxHeight = () => {
   return (
     <div 
       ref={containerRef}
-      id="Tunel-Section-Id"
       style={{
         height: `${totalBoxes * 100}vh`,
         position: "relative"
@@ -186,11 +185,14 @@ const getBoxHeight = () => {
               opacity: box1Opacity,
               y: box1Y,
               zIndex: 2,
-              boxShadow: `0 0 30px rgba(70, 123, 30, 0.3), 0 0 60px rgba(70, 123, 30, 0.1), 0 10px 40px rgba(0, 0, 0, 0.2), inset 0px 50px 0px 75px rgba(0, 0, 0, 0.2)`,
+              boxShadow: `0 0 30px rgba(70, 123, 30, 0.3),
+                  0 0 60px rgba(70, 123, 30, 0.1),
+                  0 10px 40px rgba(0, 0, 0, 0.2),
+                 inset 0px 50px 790px 75px rgba(0, 0, 0, 0.2)`,
             }}
           >
             <div className="box1icons">
-              <img src="/Icon11.png" alt="" />
+              <img src="/Icon11.png" alt=""  style={{width : "96px" , height : "96px"}}/>
               <div>
                 <span>Origin</span>
                 <h3>Grown close. Served closer.</h3>
@@ -255,7 +257,7 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box2icons">
-              <img src="/harvest-Icon.png" alt="" />
+              <img src="/harvest-Icon.png" alt=""  style={{width : "96px" , height : "96px"}}/>
               <div>
                 <span>Freshness</span>
                 <h3>Harvested at dawn. On the shelf by morning.</h3>
@@ -320,7 +322,7 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box3icons">
-              <img src="/shop-Icon.png" alt="" />
+              <img src="/shop-Icon.png" alt=""  style={{width : "96px" , height : "96px"}}/>
               <div>
                 <span>Experience</span>
                 <h3>A shop that knows your neighborhood.</h3>
@@ -336,6 +338,7 @@ const getBoxHeight = () => {
               width: getBoxWidth(),
               height: getBoxHeight(),
               backgroundColor: "#04407242",
+              border : "2px solid #054980",
               borderRadius: 20,
               display: "flex",
               alignItems: "center",
@@ -351,7 +354,7 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box4icons">
-              <img src="/standard- Icon.png" alt="" />
+              <img src="/standard- Icon.png" alt="" style={{width : "96px" , height : "96px"}}/>
               <div>
                 <span>Standard</span>
                 <h3>One rule across every branch. If it isn't right, it isn't here.</h3>

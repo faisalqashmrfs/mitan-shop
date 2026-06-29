@@ -36,15 +36,25 @@ useEffect(() => {
 
   return (
   <>
-    <section id="center" className="App"> {/* 👈 احذف scroll-container من هنا */}
-      <VerticalProgress />
-      <Hero />
-      <Tunel />
-      <Branches />
-      <AppScrollSection />
-      <Footer />
-    </section>
-  </>
+      <section id="center" className="App">
+        <VerticalProgress />
+        <section id="hero-section">
+          <Hero />
+        </section>
+        <section id="tunel-section">
+          <Tunel />
+        </section>
+        <section id="branches-section">
+          <Branches />
+        </section>
+        <section id="appscroll-section">
+          <AppScrollSection />
+        </section>
+        <section id="footer-section">
+          <Footer />
+        </section>
+      </section>
+    </>
 )
 }
 

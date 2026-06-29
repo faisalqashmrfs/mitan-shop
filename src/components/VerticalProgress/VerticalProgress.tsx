@@ -43,7 +43,7 @@ function VerticalProgress() {
     <div className="vertical-progress-containermain">
       <p className="VerticalProgress">Integrity in every aisle.</p>
       <div className="vertical-progress-container">
-        <div className="progress-number start">{ startNumber < 10 ? 0 : ""}{startNumber + 1}</div>
+        <div className="progress-number start">{ startNumber < 9 ? 0 : ""}{startNumber + 1} </div>
 
         <div className="progress-track">
           {/* شريط التقدم - يمتلئ من الأعلى للأسفل */}
