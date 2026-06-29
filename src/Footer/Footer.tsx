@@ -29,7 +29,7 @@ export default function Footer() {
           <span className='Linksfooter'>Our Website</span>
         </div>
       </footer>
-      <img className="footer-bg" src="/footerBG.png" alt="Hero Background" />
+      <img className="footer-bg" src="/footerBG.jpg" alt="Hero Background" />
     </div>
   )
 }

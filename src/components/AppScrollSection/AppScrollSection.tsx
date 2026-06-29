@@ -10,7 +10,7 @@ const CARDS_DATA = [
     subtitle: "“ The oldest living city. Our finest branch. ”",
     description: "Our flagship. Damascus demanded the full expression of everything Mitan Shop stands for — the widest range, the deepest local sourcing, and the most refined in-store experience. The Ghouta orchards, the Anti-Lebanon mountain herbs, the Damascene rose water. All here.",
     features: ["Flagship branch", "Ghouta orchards", "Mountain herbs"],
-    bgImage: "/BGapp1.png"
+    bgImage: "/BGapp1.jpg"
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const CARDS_DATA = [
     subtitle: "“ Where Syrian cuisine was born. ”",
     description: "The oldest food city in Syria. Our Aleppo branch honours that heritage — stocked with the spices, legumes, and stone-fruit that have defined northern Syrian cooking for centuries. Every item chosen with the Aleppan kitchen in mind.",
     features: ["Northern Syria", "Heritage produce", "Spice-forward range"],
-    bgImage: "/BGapp2.png"
+    bgImage: "/BGapp2.jpg"
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const CARDS_DATA = [
     subtitle: "“ Where the Jazira feeds the nation. ”",
     description: "Al-Hasaka sits in the heart of the Jazira — Syria's most fertile agricultural region. This branch carries the breadth of that land: lentils, cotton-seed oils, fresh greens, and grains that travel no more than 30km from field to shelf.",
     features: ["Al-Jazira region", "Lentils & grains", "30km farm radius"],
-    bgImage: "/BGapp3.png"
+    bgImage: "/BGapp3.jpg"
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const CARDS_DATA = [
     subtitle: "“ Syria's heartland, on your shelf.  ”",
     description: "Sitting at the crossroads of Syria, Homs draws from the fertile plains of the Orontes Valley. Our Homs branch is built around what grows here — wheat, olives, dairy, and vegetables from some of the most productive farmland in the country.",
     features: ["Central Syria", "Orontes Valley farms", "Dairy & grain focus"],
-    bgImage: "/BGapp4.png"
+    bgImage: "/BGapp4.jpg"
   }
 ];
 

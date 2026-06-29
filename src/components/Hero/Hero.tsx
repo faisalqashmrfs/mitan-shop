@@ -65,7 +65,7 @@ useEffect(() => {
 
   return (
     <div className="Hero">
-      <nav ref={navRef} className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+      <nav ref={navRef} className={`navbar `}>
         <h1 className={isScrolled ? "style2" : "style1"}>Mitan Shop</h1>
 
         <div className={isScrolled ? "line2" : "line"}>
@@ -131,7 +131,7 @@ useEffect(() => {
           </li>
         </ul>
       </nav>
-      <img className="hero-bg" src="/heroBG.png" alt="Hero Background" />
+      <img className="hero-bg" src="/heroBG.jpg" alt="Hero Background" />
     </div>
   );
 }

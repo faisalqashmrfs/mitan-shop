@@ -34,7 +34,7 @@ export default function Branches() {
         </div>
       </div>
       <p className='paragrafelast'>“Every city in Syria has its own rhythm, its own produce, its own way of eating. We didn't try to change that. We built around it.”</p>
-      <img className="Branches-bg" src="/BGmarkit.png" alt="Hero Background" />
+      <img className="Branches-bg" src="/BGmarkit.jpg" alt="Hero Background" />
     </div>
   )
 }
