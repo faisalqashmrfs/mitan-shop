@@ -1,45 +1,34 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
+import { useTranslation } from 'react-i18next';
 import "./AppScrollSection.css";
 
-// مصفوفة البيانات باللغة الإنجليزية لسكشن الفروع
-const CARDS_DATA = [
-  {
-    id: 1,
-    title: "Damascus",
-    subtitle: "“ The oldest living city. Our finest branch. ”",
-    description: "Our flagship. Damascus demanded the full expression of everything Mitan Shop stands for — the widest range, the deepest local sourcing, and the most refined in-store experience. The Ghouta orchards, the Anti-Lebanon mountain herbs, the Damascene rose water. All here.",
-    features: ["Flagship branch", "Ghouta orchards", "Mountain herbs"],
-    bgImage: "/BGapp1.jpg"
-  },
-  {
-    id: 2,
-    title: "Aleppo",
-    subtitle: "“ Where Syrian cuisine was born. ”",
-    description: "The oldest food city in Syria. Our Aleppo branch honours that heritage — stocked with the spices, legumes, and stone-fruit that have defined northern Syrian cooking for centuries. Every item chosen with the Aleppan kitchen in mind.",
-    features: ["Northern Syria", "Heritage produce", "Spice-forward range"],
-    bgImage: "/BGapp2.jpg"
-  },
-  {
-    id: 3,
-    title: "Al-Hasaka",
-    subtitle: "“ Where the Jazira feeds the nation. ”",
-    description: "Al-Hasaka sits in the heart of the Jazira — Syria's most fertile agricultural region. This branch carries the breadth of that land: lentils, cotton-seed oils, fresh greens, and grains that travel no more than 30km from field to shelf.",
-    features: ["Al-Jazira region", "Lentils & grains", "30km farm radius"],
-    bgImage: "/BGapp3.jpg"
-  },
-  {
-    id: 4,
-    title: "Homs",
-    subtitle: "“ Syria's heartland, on your shelf.  ”",
-    description: "Sitting at the crossroads of Syria, Homs draws from the fertile plains of the Orontes Valley. Our Homs branch is built around what grows here — wheat, olives, dairy, and vegetables from some of the most productive farmland in the country.",
-    features: ["Central Syria", "Orontes Valley farms", "Dairy & grain focus"],
-    bgImage: "/BGapp4.jpg"
-  }
-];
-
 function AppScrollSection() {
+  const { t } = useTranslation();
   const containerRef = useRef(null);
+
+  // جلب بيانات المدن من ملف الترجمة
+  const citiesData = t('appScroll.cities', { returnObjects: true }) as Array<{
+    title: string;
+    subtitle: string;
+    description: string;
+    features: string[];
+  }>;
+
+  // مصفوفة صور الخلفيات (ثابتة)
+  const bgImages = [
+    "/BGapp1.jpg",
+    "/BGapp2.jpg",
+    "/BGapp3.jpg",
+    "/BGapp4.jpg"
+  ];
+
+  // دمج البيانات مع الصور
+  const CARDS_DATA = citiesData.map((city, index) => ({
+    id: index + 1,
+    ...city,
+    bgImage: bgImages[index] || bgImages[0]
+  }));
 
   // حساب الارتفاع الإجمالي للتمرير ديناميكياً (عدد الكروت * 100vh)
   const totalScrollHeight = CARDS_DATA.length * 100;
@@ -66,23 +55,23 @@ function AppScrollSection() {
         justifyContent: "center"
       }}>
 
-        {/* 1. الخلفية الثابتة الدائمة (صورة دمشق) لمنع وجود فراغ أسود في البداية والنهاية */}
+        {/* 1. الخلفية الثابتة الدائمة (صورة أول مدينة) */}
         <div style={{
           position: "absolute",
           top: 0,
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundImage: `url(${CARDS_DATA[0].bgImage})`,
+          backgroundImage: `url(${CARDS_DATA[0]?.bgImage || bgImages[0]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "sepia(0.9) hue-rotate(80deg) saturate(4) brightness(0.3) contrast(1)",
           zIndex: 0
         }} />
 
-        {/* 2. طبقة الصور المتحركة بالتناوب (تبدأ من الكرت الثاني لأن الأول بالخلفية الثابتة) */}
+        {/* 2. طبقة الصور المتحركة بالتناوب */}
         {CARDS_DATA.map((card, index) => {
-          if (index === 0) return null; // تخطي الصورة الأولى منعاً لتضارب الأنميشن
+          if (index === 0) return null;
 
           const start = index / CARDS_DATA.length;
           const end = (index + 1) / CARDS_DATA.length;
@@ -120,7 +109,7 @@ function AppScrollSection() {
           );
         })}
 
-        {/* طبقة التظليل الداكنة الموحدة لضمان وضوح النصوص وقراءتها */}
+        {/* طبقة التظليل الداكنة الموحدة */}
         <div style={{
           position: "absolute",
           top: 0,
@@ -131,7 +120,7 @@ function AppScrollSection() {
           zIndex: 2
         }} />
 
-        {/* 3. حاوية الكروت الحركية المرنة والذكية */}
+        {/* 3. حاوية الكروت الحركية */}
         <div style={{
           position: "relative",
           width: "100%",
@@ -158,7 +147,6 @@ function AppScrollSection() {
             const safeCardOpacityIn  = Math.max(0, start + 0.10);
             const safeCardOpacityOut = Math.min(1, end - 0.10);
 
-            // تحريك المحور X: الكرت الأول يبدأ ثابتاً، والأخير يستقر ثابتاً عند نهاية التمرير
             const cardX = useTransform(
               scrollYProgress,
               [safeCardStart, safeCardStartIn, safeCardEndOut, safeCardEnd],
@@ -170,7 +158,6 @@ function AppScrollSection() {
               ]
             );
 
-            // الشفافية: حماية الأطراف (0 و 1) لقطع الطريق أمام عودة ظهور الكرت الأول
             const cardOpacity = useTransform(
               scrollYProgress,
               [0, safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd, 1],
@@ -184,7 +171,6 @@ function AppScrollSection() {
               ]
             );
 
-            // التحكم في البلور (الغَبَش) التابع للكروت لحركة دخول وخروج ناعمة
             const cardBlur = useTransform(
               scrollYProgress,
               [0, safeCardStart, safeCardOpacityIn, safeCardOpacityOut, safeCardEnd, 1],
@@ -215,7 +201,7 @@ function AppScrollSection() {
                 }}
                 className="responsive-card"
               >
-                {/* العنوان الأساسي للفرع */}
+                {/* ===== العنوان الأساسي للفرع ===== */}
                 <h2 style={{
                   fontSize: "clamp(24px, 5vw, 48px)",
                   fontFamily: `var(--sans)`,
@@ -227,7 +213,7 @@ function AppScrollSection() {
                   {card.title}
                 </h2>
 
-                {/* العنوان الفرعي / الاقتباس */}
+                {/* ===== العنوان الفرعي / الاقتباس ===== */}
                 <span style={{
                   fontSize: "clamp(11px, 2vw, 14px)",
                   fontWeight: "500",
@@ -241,7 +227,7 @@ function AppScrollSection() {
                   {card.subtitle}
                 </span>
 
-                {/* نص الوصف التفصيلي */}
+                {/* ===== نص الوصف التفصيلي ===== */}
                 <p style={{
                   fontSize: "clamp(13px, 2.5vw, 16px)",
                   color: "#A8B89C",
@@ -253,7 +239,7 @@ function AppScrollSection() {
                   {card.description}
                 </p>
 
-                {/* المربعات الثلاثة المميزة للمنتجات */}
+                {/* ===== المربعات الثلاثة المميزة للمنتجات ===== */}
                 <div className="features-grid">
                   {card.features.map((feat, i) => (
                     <div key={i} className="feature-item">
@@ -262,10 +248,10 @@ function AppScrollSection() {
                   ))}
                 </div>
 
-                {/* زر الشراء والإجراء */}
+                {/* ===== زر الشراء والإجراء ===== */}
                 <button className="card-shopping-btn">
-                  Start Shopping
-                  <img src="/arrowdown.png" alt="" style={{ rotate : "-90deg" }} />
+                  {t('appScroll.button')}
+                  <img src="/arrowdown.png" alt="" style={{ rotate: "-90deg" }} />
                 </button>
 
               </motion.div>

@@ -1,35 +1,61 @@
-import './Footer.css'
+import { useTranslation } from 'react-i18next';
+import './Footer.css';
 
 export default function Footer() {
+  const { t } = useTranslation();
+
+  // مصفوفة المتاجر للروابط السريعة
+  const shopLinks = [
+    { key: 'damascus', id: 'damascus-shop' },
+    { key: 'aleppo', id: 'aleppo-shop' },
+    { key: 'alHasaka', id: 'alhasaka-shop' },
+    { key: 'homs', id: 'homs-shop' }
+  ];
+
   return (
-    <div className='Footer'  id="outro">
+    <div className='Footer' id="outro">
+      {/* ===== قسم الشكر ===== */}
       <div className='topthanks'>
-        <h3>thank you</h3>
-        <h4>To reach this Far</h4>
+        <h3>{t('footer.thankYou')}</h3>
+        <h4>{t('footer.subtitle')}</h4>
       </div>
+
+      {/* ===== روابط المتاجر ===== */}
       <ul className='bottLinks'>
-        <li><a href="">Damascus Shop</a> <a href=""><img src="/goto.png" alt="" /></a></li>
-        <li><a href="">Aleppo Shop</a> <a href=""><img src="/goto.png" alt="" /></a></li>
-        <li><a href="">Al-Hasaka Shop</a> <a href=""><img src="/goto.png" alt="" /></a></li>
-        <li><a href="">Al-Hasaka Shop</a> <a href=""><img src="/goto.png" alt="" /></a></li>
+        {shopLinks.map((shop) => (
+          <li key={shop.id}>
+            <a href={`#${shop.id}`}>{t(`footer.shops.${shop.key}`)}</a>
+            <a href={`#${shop.id}`}>
+              <img src="/goto.png" alt="" />
+            </a>
+          </li>
+        ))}
       </ul>
+
+      {/* ===== الفوتر السفلي ===== */}
       <footer className='footerdown'>
+        {/* ===== القسم الأيسر ===== */}
         <div className='leftfooter'>
-          <span className='titlefooter'>This website Developed by Technopark team</span>
+          <span className='titlefooter'>{t('footer.developedBy')}</span>
           <div className='Linksfooter'>
-            <span>Terms & Condotion</span>
-            <span>Privacy & Policy</span>
+            <span>{t('footer.terms')}</span> 
+            <span> & </span>
+            <span>{t('footer.privacy')}</span>
           </div>
-          <span>© 2026 All rights reserved. Please review our terms and <br /> conditions for more information.</span>
+          <span>{t('footer.rights')}</span>
         </div>
+
+        {/* ===== القسم الأيمن ===== */}
         <div className='rightfooter'>
-          <span  className='titlefooter'>Technopark Design Studio </span>
-          <span className='Linksfooter'>Instagram</span>
-          <span className='Linksfooter'>Linked In</span>
-          <span className='Linksfooter'>Our Website</span>
+          <span className='titlefooter'>{t('footer.studio')}</span>
+          <span className='Linksfooter'>{t('footer.instagram')}</span>
+          <span className='Linksfooter'>{t('footer.linkedin')}</span>
+          <span className='Linksfooter'>{t('footer.website')}</span>
         </div>
       </footer>
+
+      {/* ===== صورة الخلفية ===== */}
       <img className="footer-bg" src="/footerBG.jpg" alt="Hero Background" />
     </div>
-  )
+  );
 }

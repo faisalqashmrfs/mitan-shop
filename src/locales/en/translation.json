@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "title": "Mitan Shop",
+    "subtitle": "Groceries Curated for Uncompromising Standard",
+    "button": "Scroll to Explore",
+    "nav": {
+      "intro": "INTRO",
+      "features": "FEATURES",
+      "branches": "BRANCHES",
+      "outro": "OUTRO"
+    }
+  },
+  "appbox": {
+    "boxes": [
+      {
+        "tag": "Origin",
+        "title": "Grown close. Served closer.",
+        "description": "Every item traced to a farm within 150km. You know where it came from before you put it in your basket."
+      },
+      {
+        "tag": "Freshness",
+        "title": "Harvested at dawn. On the shelf by morning.",
+        "description": "Our supply chain runs overnight so nothing sits in a warehouse. What arrives today was still in the ground yesterday."
+      },
+      {
+        "tag": "Experience",
+        "title": "A shop that knows your neighborhood.",
+        "description": "Every branch is stocked differently — based on what the people in that city actually eat. Local staff, local knowledge, local produce. Not a chain. A neighbor."
+      },
+      {
+        "tag": "Standard",
+        "title": "One rule across every branch. If it isn't right, it isn't here.",
+        "description": "We turn down more produce than we accept. Every item passes a single standard — not a grading scale, not a flexible policy. One standard. The right one. Across every city we operate in, no exceptions."
+      }
+    ]
+  },
+  "branches": {
+    "tag": "Our branches",
+    "title": "Four cities.",
+    "titleHighlight": "One standard.",
+    "mainDescription": "From Damascus to Al-Hasaka the same shelf, the same care.",
+    "supDescription": "Mitan Shop was built for Syria. Not as a concept, not as a trial — as a commitment to the people, the farmers, and the kitchens of four of its most distinct cities. Every branch is its own place, stocked by people who live there, sourced from land nearby. But walk into any one of them and you will feel the same thing: this shop was made for me.",
+    "cards": {
+      "branches": "City branches",
+      "farmers": "Local farm partners",
+      "standard": "Quality standard"
+    },
+    "quote": "Every city in Syria has its own rhythm, its own produce, its own way of eating. We didn't try to change that. We built around it."
+  },
+  "appScroll": {
+    "button": "Start Shopping",
+    "cities": [
+      {
+        "title": "Damascus",
+        "subtitle": "“ The oldest living city. Our finest branch. ”",
+        "description": "Our flagship. Damascus demanded the full expression of everything Mitan Shop stands for — the widest range, the deepest local sourcing, and the most refined in-store experience. The Ghouta orchards, the Anti-Lebanon mountain herbs, the Damascene rose water. All here.",
+        "features": ["Flagship branch", "Ghouta orchards", "Mountain herbs"]
+      },
+      {
+        "title": "Aleppo",
+        "subtitle": "“ Where Syrian cuisine was born. ”",
+        "description": "The oldest food city in Syria. Our Aleppo branch honours that heritage — stocked with the spices, legumes, and stone-fruit that have defined northern Syrian cooking for centuries. Every item chosen with the Aleppan kitchen in mind.",
+        "features": ["Northern Syria", "Heritage produce", "Spice-forward range"]
+      },
+      {
+        "title": "Al-Hasaka",
+        "subtitle": "“ Where the Jazira feeds the nation. ”",
+        "description": "Al-Hasaka sits in the heart of the Jazira — Syria's most fertile agricultural region. This branch carries the breadth of that land: lentils, cotton-seed oils, fresh greens, and grains that travel no more than 30km from field to shelf.",
+        "features": ["Al-Jazira region", "Lentils & grains", "30km farm radius"]
+      },
+      {
+        "title": "Homs",
+        "subtitle": "“ Syria's heartland, on your shelf. ”",
+        "description": "Sitting at the crossroads of Syria, Homs draws from the fertile plains of the Orontes Valley. Our Homs branch is built around what grows here — wheat, olives, dairy, and vegetables from some of the most productive farmland in the country.",
+        "features": ["Central Syria", "Orontes Valley farms", "Dairy & grain focus"]
+      }
+    ]
+  },
+  "footer": {
+    "thankYou": "thank you",
+    "subtitle": "To reach this Far",
+    "shops": {
+      "damascus": "Damascus Shop",
+      "aleppo": "Aleppo Shop",
+      "alHasaka": "Al-Hasaka Shop",
+      "homs": "Homs Shop"
+    },
+    "developedBy": "This website Developed by Technopark team",
+    "terms": "Terms & Condition",
+    "privacy": "Privacy & Policy",
+    "rights": "© 2026 All rights reserved. Please review our terms and conditions for more information.",
+    "studio": "Technopark Design Studio",
+    "instagram": "Instagram",
+    "linkedin": "Linked In",
+    "website": "Our Website"
+  },
+  "verticalProgress": {
+    "label": "Integrity in every aisle."
+  }
+}

@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef, useEffect, useState } from "react"; // أضف useState و useEffect
+import { useRef, useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import "./Appbox.css";
 
 function Appbox() {
+  const { t } = useTranslation();
   const totalBoxes = 7;
   const containerRef = useRef(null);
 
@@ -19,15 +21,15 @@ function Appbox() {
 
   // دالة مساعدة لحساب الحجم بناءً على العرض (لتكون مرنة)
   const getResponsiveSize = (baseSize: number) => {
-    if (windowWidth < 480) return baseSize * 0.3;  // جوال صغير
-    if (windowWidth < 768) return baseSize * 0.4;  // جوال
-    if (windowWidth < 1024) return baseSize * 0.6; // تابلت
-    return baseSize; // ديسكتوب
+    if (windowWidth < 480) return baseSize * 0.3;
+    if (windowWidth < 768) return baseSize * 0.4;
+    if (windowWidth < 1024) return baseSize * 0.6;
+    return baseSize;
   };
 
   // دالة لتعديل الإحداثيات (X, Y) لتتناسب مع الشاشة
   const getResponsivePosition = (value: number) => {
-    if (windowWidth < 768) return value * 0.3; // تصغير المسافات على الجوال
+    if (windowWidth < 768) return value * 0.3;
     if (windowWidth < 1024) return value * 0.6;
     return value;
   };
@@ -52,17 +54,19 @@ function Appbox() {
     if (windowWidth < 480) return "85%";
     if (windowWidth < 768) return "80%";
     if (windowWidth < 1024) return "60%";
-    return "45%"; // القيمة الأصلية لأول صندوق
+    return "45%";
   };
 
-const getBoxHeight = () => {
-  if (windowWidth < 480) return 180;  // كانت 120
-  if (windowWidth < 768) return 200;  // كانت 150
-  if (windowWidth < 1024) return 230; // كانت 180
-  return 250; // كانت 200 - زيادة 50px
-};
+  const getBoxHeight = () => {
+    if (windowWidth < 480) return 180;
+    if (windowWidth < 768) return 200;
+    if (windowWidth < 1024) return 230;
+    return 250;
+  };
 
-  // ... (الكود المتبقي من الـ Hooks الخاصة بالـ Scroll يبقى كما هو بدون تغيير) ...
+  // ============================================================
+  // 4. حركات السكرول (تظل كما هي)
+  // ============================================================
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -88,7 +92,7 @@ const getBoxHeight = () => {
   const box4Opacity = useTransform(scrollYProgress, [0.75, 0.80, 0.93], [0, 1, 1]);
   const box4Y = useTransform(scrollYProgress, [0.75, 0.85, 0.93], [-20, 100, 200]);
 
-  // ... (الكود الخاص بحركات الأيقونات يبقى كما هو) ...
+  // ===== حركات الأيقونات =====
   const icon1Move = useTransform(scrollYProgress, [0.12, 0.18, 0.25, 0.27], [0, 1, 1.5, 2]);
   const icon1Opacity = useTransform(scrollYProgress, [0.12, 0.15, 0.23, 0.25, 0.27], [0, 1, 1, 1, 0]);
   const icon2Move = useTransform(scrollYProgress, [0.25, 0.37, 0.50, 0.52], [0, 1, 1.5, 2]);
@@ -96,12 +100,12 @@ const getBoxHeight = () => {
   const icon3Move = useTransform(scrollYProgress, [0.50, 0.62, 0.75, 0.77], [0, 1, 1.5, 2]);
   const icon3Opacity = useTransform(scrollYProgress, [0.50, 0.55, 0.72, 0.75, 0.77], [0, 1, 1, 1, 0]);
 
-  const getRandomRotation = (baseRotation : number) => {
+  const getRandomRotation = (baseRotation: number) => {
     return baseRotation + Math.random() * 540;
   };
 
   // ============================================================
-  // 4. تحديث الـ return (نفس الكود لكن مع تعديل الـ style للصناديق)
+  // 5. الـ Return مع النصوص الديناميكية
   // ============================================================
   return (
     <div 
@@ -166,12 +170,12 @@ const getBoxHeight = () => {
             );
           })}
 
-          {/* صندوق رقم 1 - تم تعديل الـ width والـ height هنا */}
+          {/* ===== الصندوق الأول - Box 1 ===== */}
           <motion.div
             style={{
               position: "absolute",
-              width: getBoxWidth(),    // <-- أصبح متجاوباً
-              height: getBoxHeight(),  // <-- أصبح متجاوباً
+              width: getBoxWidth(),
+              height: getBoxHeight(),
               backgroundColor: "#6AB0131F",
               border: "2px solid #467B1E",
               borderRadius: 20,
@@ -192,16 +196,16 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box1icons">
-              <img src="/Icon11.png" alt=""  style={{width : "96px" , height : "96px"}}/>
+              <img src="/Icon11.png" alt="" style={{ width: "96px", height: "96px" }} />
               <div>
-                <span>Origin</span>
-                <h3>Grown close. Served closer.</h3>
-                <p>Every item traced to a farm within 150km. You know where it came from before you put it in your basket.</p>
+                <span>{t('appbox.boxes.0.tag')}</span>
+                <h3>{t('appbox.boxes.0.title')}</h3>
+                <p>{t('appbox.boxes.0.description')}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* ===== الصندوق الثاني ===== */}
+          {/* ===== الصندوق الثاني - Box 2 ===== */}
           {iconsData.map((pos, i) => {
             const randomRotate = getRandomRotation(pos.rotation || 360);
             return (
@@ -238,8 +242,8 @@ const getBoxHeight = () => {
           <motion.div
             style={{
               position: "absolute",
-              width: getBoxWidth(),    // <-- متجاوب
-              height: getBoxHeight(),  // <-- متجاوب
+              width: getBoxWidth(),
+              height: getBoxHeight(),
               backgroundColor: "#f9741636",
               border: "2px solid #F97316",
               borderRadius: 20,
@@ -257,16 +261,16 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box2icons">
-              <img src="/harvest-Icon.png" alt=""  style={{width : "96px" , height : "96px"}}/>
+              <img src="/harvest-Icon.png" alt="" style={{ width: "96px", height: "96px" }} />
               <div>
-                <span>Freshness</span>
-                <h3>Harvested at dawn. On the shelf by morning.</h3>
-                <p>Our supply chain runs overnight so nothing sits in a warehouse. What arrives today was still in the ground yesterday.</p>
+                <span>{t('appbox.boxes.1.tag')}</span>
+                <h3>{t('appbox.boxes.1.title')}</h3>
+                <p>{t('appbox.boxes.1.description')}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* ===== الصندوق الثالث ===== */}
+          {/* ===== الصندوق الثالث - Box 3 ===== */}
           {iconsData.map((pos, i) => {
             const randomRotate = getRandomRotation(pos.rotation || 360);
             return (
@@ -322,23 +326,23 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box3icons">
-              <img src="/shop-Icon.png" alt=""  style={{width : "96px" , height : "96px"}}/>
+              <img src="/shop-Icon.png" alt="" style={{ width: "96px", height: "96px" }} />
               <div>
-                <span>Experience</span>
-                <h3>A shop that knows your neighborhood.</h3>
-                <p>Every branch is stocked differently — based on what the people in that city actually eat. Local staff, local knowledge, local produce. Not a chain. A neighbor.</p>
+                <span>{t('appbox.boxes.2.tag')}</span>
+                <h3>{t('appbox.boxes.2.title')}</h3>
+                <p>{t('appbox.boxes.2.description')}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* ===== الصندوق الرابع ===== */}
+          {/* ===== الصندوق الرابع - Box 4 ===== */}
           <motion.div
             style={{
               position: "absolute",
               width: getBoxWidth(),
               height: getBoxHeight(),
               backgroundColor: "#04407242",
-              border : "2px solid #054980",
+              border: "2px solid #054980",
               borderRadius: 20,
               display: "flex",
               alignItems: "center",
@@ -354,11 +358,11 @@ const getBoxHeight = () => {
             }}
           >
             <div className="box4icons">
-              <img src="/standard- Icon.png" alt="" style={{width : "96px" , height : "96px"}}/>
+              <img src="/standard- Icon.png" alt="" style={{ width: "96px", height: "96px" }} />
               <div>
-                <span>Standard</span>
-                <h3>One rule across every branch. If it isn't right, it isn't here.</h3>
-                <p>We turn down more produce than we accept. Every item passes a single standard — not a grading scale, not a flexible policy. One standard. The right one. Across every city we operate in, no exceptions.</p>
+                <span>{t('appbox.boxes.3.tag')}</span>
+                <h3>{t('appbox.boxes.3.title')}</h3>
+                <p>{t('appbox.boxes.3.description')}</p>
               </div>
             </div>
           </motion.div>

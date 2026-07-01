@@ -7,7 +7,7 @@
 {
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -33,9 +33,11 @@
 }
 .Hero .navbar .style1
 {
+    position: absolute;
     color: #fff;
     transition: 0.4s;
-    transform: translate(50px , 55vh);
+    top: 55vh;
+    inset-inline-start: 80px;
     font-size: 124px;
     width: 200px;
     font-family: var(--sans);
@@ -46,11 +48,12 @@
 }
 .Hero .navbar .style2
 {
+    position: absolute;
     font-family: var(--sans);
     color: #F4F1E8;
     transition: .4s;
     font-size: 24px;
-    color: #fff;
+    inset-inline-start: 80px;
     transform: translate(0px , 0vh)
 }
 .Hero .navbar .line
@@ -63,7 +66,7 @@
     transform: translate(0px , 55vh);
     height: 350px;
     position: absolute;
-    left: 80px;
+    inset-inline-start: 80px;
     opacity: 1;
     transition: opacity 0.4s ease;
 }
@@ -117,8 +120,10 @@
     list-style: none;
     width: 40%;
     justify-content: space-between;
+    position: absolute;
+    top: 70px;
+    inset-inline-end: 80px;
 }
-
 .Hero .navbar ul li .activeLink
 {
     color: #6AB013;
@@ -127,7 +132,7 @@
     font-weight: 400;
     transition: color 0.3s ease;
     letter-spacing: 1.4px;
-    background-image: url(./NavButtonAcitive.svg);
+    background-image: url(/NavButtonAcitive.svg);
     padding:5px 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -143,7 +148,10 @@
     letter-spacing: 1.4px;
     padding:5px 20px;
 }
-
+.Hero .menu-toggle
+{
+    display : none;
+}
 /* --- التجاوب مع الشاشات المتوسطة والصغيرة (التابلت والموبايل) --- */
 
 /* --- التجاوب مع الشاشات المتوسط والصغيرة (بدءاً من 992px فما دون) --- */
@@ -161,23 +169,28 @@
 
     /* تعديل اللوجو الكبير عند عدم السكرول */
     .Hero .navbar .style1 {
-        font-size: 64px; /* تصغير متناسب مع الشاشات المتوسطة */
+        font-size: 64px;
         line-height: 70px;
-        transform: translate(-50%, -50%);
         width: max-content;
         position: absolute;
         top: 50vh;
-        left: 50vw;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        margin-inline: auto;
+        transform: translateY(-50%);
     }
 
     /* تعديل النص والزر في المنتصف */
     .Hero .navbar .line {
         align-items: center;
         gap: 20px;
-        transform: translate(-50% , 57vh);
         height: auto;
         position: absolute;
-        left: 50vw;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        margin-inline: auto;
+        top: 50vh;
+        transform: translateY(55%);
         width: max-content;
     }
 
@@ -203,8 +216,8 @@
         cursor: pointer;
         z-index: 110;
         position: absolute;
-        top: 25px; /* متناسق مع padding الـ navbar في هذا العرض */
-        right: 0px; 
+        top: 35px; /* متناسق مع padding الـ navbar في هذا العرض */
+        inset-inline-end: 0px; 
         line-height: 1;
         padding: 5px;
     }
@@ -214,8 +227,8 @@
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 0;
-        right: -100%; /* مخفية */
+        top: 0px;
+        inset-inline-end: -100%; /* مخفية */
         width: 60%; /* تأخذ مساحة مناسبة من الشاشة المتوسطة */
         height: 100vh;
         background-color: rgba(14, 26, 18, 0.98);
@@ -229,7 +242,7 @@
 
     /* عند فتح القائمة */
     .Hero .navbar ul.nav-links.open {
-        right: 0;
+        inset-inline-end: 0;
     }
 
     .Hero .navbar ul li {
@@ -242,6 +255,7 @@
         font-size: 22px;
         transform: none;
         position: static;
+        margin : 0 40px
     }
 }
 
@@ -254,74 +268,33 @@
     .Hero .navbar {
         width: calc(100% - 40px);
         padding: 20px 0px;
-    }
-
-    .Hero .menu-toggle {
-        top: 20px; /* تقريب الزر لأعلى في الشاشات الصغيرة جداً */
-    }
-
-    .Hero .navbar .style1 {
-        font-size: 42px;
-        line-height: 48px;
-    }
-
-    .Hero .navbar .line span {
-        font-size: 16px;
-    }
-
-    .Hero .navbar ul.nav-links {
-        width: 80%; /* زيادة عرض القائمة لتناسب الهواتف */
-    }
-}
-
-/* --- الهواتف الصغيرة جداً (470px فما دون) --- */
-@media (max-width: 470px) {
-    .Hero .navbar .style1 {
-        font-size: 28px;
-    }
-    .Hero .navbar .line span {
-        font-size: 12px;
-        text-align: center;
-        max-width: 280px; /* لضمان نزول النص لسطرين بشكل منسق */
-    }
-}
-
-/* إخفاء زر الهامبرغر في الشاشات الكبيرة تلقائياً */
-.Hero .menu-toggle {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .Hero {
-        padding: 0px 20px;
-    }
-
-    .Hero .navbar {
-        width: calc(100% - 40px);
-        padding: 20px 0px;
         max-height: none;
     }
 
-    /* تعديل اللوجو الكبير عند عدم السكرول */
+    /* ===== تعديل اللوجو الكبير ===== */
     .Hero .navbar .style1 {
-        font-size: 38px;
-        line-height: 50px;
-        transform: translate(-55%, -50%);
+        font-size: 42px;
+        line-height: 48px;
         width: max-content;
         position: absolute;
         top: 50vh;
-        left: 50vw;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        margin-inline: auto;
+        transform: translateY(-50%);
     }
 
-    /* تعديل النص والزر في المنتصف */
-    .Hero .navbar .line
-    {
+    /* ===== تعديل النص والزر في المنتصف ===== */
+    .Hero .navbar .line {
         align-items: center;
         gap: 20px;
-        transform: translate(-55% , 57vh);
         height: auto;
         position: absolute;
-        left: 50vw;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        margin-inline: auto;
+        top: 50vh;
+        transform: translateY(55%);
         width: max-content;
     }
 
@@ -331,35 +304,37 @@
 
     .Hero .navbar .line button {
         padding: 8px 40px;
-        width: 100%; /* ليصبح الزر متناسقاً على الموبايل */
+        width: 100%;
         max-width: 250px;
     }
 
+    /* ===== زر الهامبرغر ===== */
     .Hero .menu-toggle {
-        display: block !important; /* نضمن إلغاء الـ display:none السابق */
+        display: block !important;
         background: transparent;
         border: none;
-        color: #A8B89C; /* لون متناسق مع هوية موقعك */
-        font-size: 32px; /* تكبير الحجم ليكون أسهل في الضغط */
+        color: #A8B89C;
+        font-size: 32px;
         cursor: pointer;
-        z-index: 110; /* أعلى من الـ ul المنسدلة لكي تستطيع إغلاقها أيضاً */
+        z-index: 110;
         position: absolute;
-        top: 20px;
-        right: 20px; /* تثبيته في الزاوية اليمنى العليا */
+        top: 15px;
+        inset-inline-end: 20px; 
         line-height: 1;
+        width: 40px;
         padding: 5px;
     }
 
-    /* تحويل القائمة الـ ul إلى قائمة جانبية أو علوية منسدلة */
+    /* ===== القائمة المنسدلة ===== */
     .Hero .navbar ul.nav-links {
         display: flex;
         flex-direction: column;
         position: fixed;
         top: 0;
-        right: -100%; /* مخفية افتراضياً */
+        inset-inline-end: -100%; /* في LTR: right: -100%، في RTL: left: -100% */
         width: 70%;
         height: 100vh;
-        background-color: rgba(14, 26, 18, 0.95); /* خلفية داكنة متناسقة */
+        background-color: rgba(14, 26, 18, 0.95);
         justify-content: center;
         align-items: center;
         gap: 30px;
@@ -370,7 +345,7 @@
 
     /* عند فتح القائمة */
     .Hero .navbar ul.nav-links.open {
-        right: 0;
+        inset-inline-end: 0; /* في LTR: right: 0، في RTL: left: 0 */
     }
 
     .Hero .navbar ul li {
@@ -379,19 +354,29 @@
     }
 }
 
-/* إخفاء زر الهامبرغر في الشاشات الكبيرة تلقائياً */
-.Hero .menu-toggle {
-    display: none;
-}
-
-
-@media (max-width: 470px)
-{
+/* ===== الهواتف الصغيرة جداً (470px فما دون) ===== */
+@media (max-width: 470px) {
     .Hero .navbar .style1 {
         font-size: 28px;
-        transform: translate(-55%, -50%);
+        line-height: 34px;
     }
+    
+    .Hero .navbar .line {
+        transform: translateY(60%); /* زيادة قليلاً للنزول */
+    }
+    
     .Hero .navbar .line span {
         font-size: 12px;
+        text-align: center;
+        max-width: 280px;
+    }
+    
+    .Hero .navbar .line button {
+        padding: 6px 30px;
+        font-size: 11px;
+    }
+    .Hero .navbar .style2 {
+        margin : 0 20px
     }
 }
+

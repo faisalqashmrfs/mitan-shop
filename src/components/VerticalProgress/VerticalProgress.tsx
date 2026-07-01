@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./VerticalProgress.css";
+import { useTranslation } from "react-i18next";
 
 function VerticalProgress() {
   const [progress, setProgress] = useState(0);
   const [currentSection, setCurrentSection] = useState(0);
   const animationRef = useRef<number | null>(null);
-
+  const { t } = useTranslation();
   const updateProgress = useCallback(() => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
@@ -41,7 +42,7 @@ function VerticalProgress() {
 
   return (
     <div className="vertical-progress-containermain">
-      <p className="VerticalProgress">Integrity in every aisle.</p>
+      <p className="VerticalProgress">{t('verticalProgress.label')}</p>
       <div className="vertical-progress-container">
         <div className="progress-number start">{ startNumber < 9 ? 0 : ""}{startNumber + 1} </div>
 

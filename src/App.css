@@ -17,3 +17,23 @@ html {
 #Footer-Section-Id {
   scroll-snap-align: none;
 }
+
+
+.languageswitcher
+{
+    position: 'fixed';
+    top: '65px';
+    inset-inline-end: '60px';
+    z-index: 1000;
+    padding: '4px 8px';
+    border-radius: '30px';
+    border: '2px solid #fff';
+    background: 'rgba(0,0,0,0.7)';
+    color: '#fff';
+    cursor: 'pointer';
+    backdrop-filter: 'blur(10px)';
+    transition: 'all 0.3s ease';
+    font-size: '14px';
+    font-weight: '500';
+    letter-spacing: '0.5px'
+}
